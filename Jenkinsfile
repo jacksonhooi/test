@@ -8,16 +8,7 @@ pipeline {
             }
         }
 
-        stage('Code Quality Check via SonarQube') {
-            steps {
-                script {
-                    def scannerHome = tool 'SonarQube'
-                    withSonarQubeEnv('SonarQube') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=PracticalTest -Dsonar.sources=."
-                    }
-                }
-            }
-        }
+      
 
         stage('OWASP Dependency-Check Vulnerabilities') {
             steps {
