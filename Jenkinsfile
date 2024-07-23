@@ -2,7 +2,22 @@ pipeline {
     agent any
 
     stages {
-      
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/jacksonhooi/test.git'
+            }
+        }
+
+        stage('Code Quality Check via SonarQube') {
+            steps {
+                script {
+                    def scannerHome = tool 'SonarQube'
+                    withSonarQubeEnv('SonarQube') {
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=PracticalTest -Dsonar.sources=."
+                    }
+                }
+            }
+        }
 
         stage('OWASP Dependency-Check Vulnerabilities') {
             steps {
