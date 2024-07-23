@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'http://fc4df1d40c9e/Jackson_Hooi_Kar_Wai/practical-test.git'
+                git branch: 'main', url: 'https://github.com/jacksonhooi/test.git'
             }
         }
 
@@ -12,8 +12,8 @@ pipeline {
             steps {
                 script {
                     def scannerHome = tool 'SonarQube'
-                    withSonarQubeEnv('Testing') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=Testing -Dsonar.sources=."
+                    withSonarQubeEnv('SonarQube') {
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=Practical Test -Dsonar.sources=."
                     }
                 }
             }
